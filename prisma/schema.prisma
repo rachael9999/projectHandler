@@ -1,0 +1,24 @@
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Board {
+  id String @id @default(uuid())
+  orgId String
+  title String
+  imageId String
+
+  ImageThumbUrl String @db.Text
+  ImageFullUrl String @db.Text
+  ImageUserName String @db.Text
+  ImageLinkHTML String @db.Text
+
+  createAT DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
