@@ -15,7 +15,6 @@ import { useAction } from "@/hooks/useAction";
 import { Button } from "@/components/ui/button";
 import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
-import { FormSubmit } from "@/components/form/form-submit";
 import { Separator } from "@/components/ui/separator";
 
 interface ListOptionProps {
@@ -89,23 +88,27 @@ export const ListOption = ({ data, onAddCard }: ListOptionProps) => {
         <form action={onCopy}>
           <input hidden name="id" id="id" value={data.id} />
           <input hidden name="boardId" id="boardId" value={data.boardId} />
-          <FormSubmit
+          <Button
+            type="submit"
             variant="ghost"
+            size="sm"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           >
-            Copy list
-          </FormSubmit>
+            Copy this list
+          </Button>
         </form>
         <Separator />
         <form action={onDelete}>
           <input hidden name="id" id="id" value={data.id} />
           <input hidden name="boardId" id="boardId" value={data.boardId} />
-          <FormSubmit
+          <Button
+            type="submit"
             variant="ghost"
+            size="sm"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           >
             Delete this list
-          </FormSubmit>
+          </Button>
         </form>
       </PopoverContent>
     </Popover>

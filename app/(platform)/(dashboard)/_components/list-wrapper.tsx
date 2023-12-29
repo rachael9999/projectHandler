@@ -5,7 +5,7 @@ interface ListWrapperProps {
 export const ListWrapper = ({ children }: ListWrapperProps) => {
   return (
     <div>
-      <li className="shrink-0 h-full w-[272px] select-none">{children}</li>
+      <ul className="shrink-0 h-full w-[272px] select-none ">{children}</ul>
     </div>
   );
 };

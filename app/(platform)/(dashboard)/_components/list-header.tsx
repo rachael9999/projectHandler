@@ -10,8 +10,9 @@ import { useEventListener } from "usehooks-ts";
 import { ListOption } from "./list-option";
 interface listHeaderProps {
   data: List;
+  onAddCard: () => void;
 }
-export const ListHeader = ({ data }: listHeaderProps) => {
+export const ListHeader = ({ data, onAddCard }: listHeaderProps) => {
   const [title, setTitle] = useState(data.title);
 
   const formRef = useRef<ElementRef<"form">>(null);
@@ -81,19 +82,19 @@ export const ListHeader = ({ data }: listHeaderProps) => {
             placeholder="Enter list title..."
             defaultValue={title}
             error={FieldErrors}
-            className="text-sm px-2 py-1 h-7 font-medium border-transparent 
+            className="text-sm px-2 py-1 h-7 font-semibold border-transparent 
                     hover:border-input focus:border-input transition truncate"
           />
         </form>
       ) : (
         <div
           onClick={enableEditing}
-          className="w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent"
+          className="w-full text-sm font-semibold px-2.5 py-1 h-7 border-transparent"
         >
           {title}
         </div>
       )}
-      <ListOption onAddCard={() => {}} data={data} />
+      <ListOption onAddCard={onAddCard} data={data} />
     </div>
   );
 };

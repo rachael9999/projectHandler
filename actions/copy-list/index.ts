@@ -45,6 +45,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       select: { order: true },
     });
 
+    // ohhhhhhhh new order boiiii
     const newOrder = lastList ? lastList.order + 1 : 1;
 
     list = await db.list.create({
@@ -56,7 +57,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
           createMany: {
             data: listToCopy.cards.map((card) => ({
               title: card.title,
-              description: card.descrption,
+              descrption: card.descrption,
               order: card.order,
             })),
           },
