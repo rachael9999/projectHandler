@@ -6,8 +6,8 @@ export const UpdateCardOrder = z.object({
       id: z.string(),
       title: z.string(),
       order: z.number(),
-      listId: z.number(),
-      createdAt: z.date(),
+      listId: z.string(),
+      createAT: z.date(),
       updatedAt: z.date(),
     })
   ),
