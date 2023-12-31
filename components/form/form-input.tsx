@@ -64,7 +64,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         </div>
         <FormErrors id={id} error={error} />
 
-        <Button
+        {/* <Button
           type="submit"
           size="sm"
           disabled={pending || disabled}
@@ -72,7 +72,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           variant="primary"
         >
           Submit
-        </Button>
+        </Button> */}
       </div>
     );
   }
