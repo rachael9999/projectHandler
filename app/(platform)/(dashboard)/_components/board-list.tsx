@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MAX_BOARD } from "@/constants/board";
 import { getAvailableCount } from "@/lib/org-limit";
+import { checkSubscription } from "@/lib/check-subscription";
 export const BoardList = async () => {
   const { orgId } = auth();
   if (!orgId) {
@@ -23,7 +24,7 @@ export const BoardList = async () => {
   });
 
   const avaiCount = await getAvailableCount();
-  console.log(avaiCount);
+  const isPro = await checkSubscription();
 
   return (
     <div className="space-y-4">
@@ -52,7 +53,7 @@ export const BoardList = async () => {
           >
             <p className="text-sm ml-2 mr-2">create new board</p>
             <span className="text-xs">
-              {`${MAX_BOARD - avaiCount}`} remaining
+              {isPro ? "Unlimited Board" : `${MAX_BOARD - avaiCount} remaining`}
             </span>
             <Remaining
               sideOffset={40}

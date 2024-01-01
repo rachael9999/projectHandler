@@ -15,6 +15,7 @@ import { X } from "lucide-react";
 import { FormBgPicker } from "./form-bg";
 import { ElementRef, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ export const FormPopover = ({
   align,
   sideOffset = 0,
 }: FormPopoverProps) => {
+  const proModal = useProModal();
   const router = useRouter();
   const { execute, FieldErrors } = useAction(createBoard, {
     onSuccess: (data) => {
@@ -38,6 +40,7 @@ export const FormPopover = ({
     },
     onError: (error) => {
       toast.error(error);
+      proModal.onOpen();
     },
   });
 

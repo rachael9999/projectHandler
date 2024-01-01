@@ -24,7 +24,7 @@ const MarketingPage = () => {
         </div>
 
         <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
-          Taskify helps team move
+          Streamline helps team move
         </h1>
 
         <div
@@ -45,12 +45,12 @@ const MarketingPage = () => {
       >
         Collaborate, Manage Project, and reach new productivity peaks. From high
         rises to home office, the way yout team works is unique - accomplish it
-        all with Taskify.
+        all with Streamline.
       </div>
 
       <div>
         <Button className="mt-6" size="lg" asChild>
-          <Link href="/sign-up">Get Taskify for free</Link>
+          <Link href="/sign-up">Get Streamline for free</Link>
         </Button>
       </div>
     </div>

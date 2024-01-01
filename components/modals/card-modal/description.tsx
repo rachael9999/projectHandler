@@ -64,10 +64,6 @@ export const Description = ({ data }: DescriptionProps) => {
   });
 
   const onSubmit = (formData: FormData) => {
-    Array.from(formData.entries()).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`);
-    });
-
     const description = formData.get("description") as string;
     const boardId = params.boardId as string;
 

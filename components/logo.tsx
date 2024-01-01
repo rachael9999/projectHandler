@@ -20,7 +20,7 @@ export const Logo = () => {
             textRobotoFont.className
           )}
         >
-          Taskify
+          Streamline
         </p>
       </div>
     </Link>

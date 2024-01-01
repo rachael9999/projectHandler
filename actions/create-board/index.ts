@@ -9,6 +9,7 @@ import { CreateBoard } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { incrementAvailableCount, hasAvailableCount } from "@/lib/org-limit";
+import { checkSubscription } from "@/lib/check-subscription";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -20,8 +21,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   const canCreate = await hasAvailableCount();
+  const isPro = await checkSubscription();
 
-  if (!canCreate) {
+  if (!canCreate && !isPro) {
     return {
       error:
         "You have created your limit of free board. Please upgrade to create more. ",
@@ -44,13 +46,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       error: "Missing fields. Failed to create board",
     };
   }
-  console.log({
-    imageId,
-    ImageThumbUrl,
-    ImageFullUrl,
-    ImageLinkHTML,
-    ImageUserName,
-  });
 
   let board;
   try {
@@ -65,7 +60,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         ImageLinkHTML,
       },
     });
-    await incrementAvailableCount();
+
+    if (!isPro) {
+      await incrementAvailableCount();
+    }
 
     await createAuditLog({
       entityTitle: board.title,

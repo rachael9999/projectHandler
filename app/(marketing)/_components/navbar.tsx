@@ -12,7 +12,7 @@ export const Navbar = () => {
             <Link href="/sign-in">Login</Link>
           </Button>
           <Button>
-            <Link href="/sign-up">Get Taskify for free</Link>
+            <Link href="/sign-up">Get Streamline for free</Link>
           </Button>
         </div>
       </div>
