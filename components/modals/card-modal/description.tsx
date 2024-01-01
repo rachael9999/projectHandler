@@ -14,11 +14,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { FormText } from "@/components/form/form-text";
 import { Button } from "@/components/ui/button";
 
-interface DescrptionProps {
+interface DescriptionProps {
   data: CardWithList;
 }
 
-export const Descrption = ({ data }: DescrptionProps) => {
+export const Description = ({ data }: DescriptionProps) => {
   const params = useParams();
   const queryClient = useQueryClient();
 
@@ -68,12 +68,12 @@ export const Descrption = ({ data }: DescrptionProps) => {
       console.log(`${key}: ${value}`);
     });
 
-    const descrption = formData.get("description") as string;
+    const description = formData.get("description") as string;
     const boardId = params.boardId as string;
 
     execute({
       id: data.id,
-      descrption,
+      description,
       boardId,
     });
   };
@@ -89,7 +89,7 @@ export const Descrption = ({ data }: DescrptionProps) => {
               id="description"
               className="w-full mt-2"
               placeholder="Add description"
-              defaultValue={data.descrption || undefined}
+              defaultValue={data.description || undefined}
               errors={FieldErrors}
               ref={textareaRef}
             />
@@ -119,7 +119,7 @@ export const Descrption = ({ data }: DescrptionProps) => {
             role="button"
             className="min-h-[78px] bg-neutral-200 text-sm font-medium py-3 px-3.5 rounded-md"
           >
-            {data.descrption || "Add description..."}
+            {data.description || "Add description..."}
           </div>
         )}
       </div>
@@ -127,7 +127,7 @@ export const Descrption = ({ data }: DescrptionProps) => {
   );
 };
 
-Descrption.Skeleton = function DescriptionSkeleton() {
+Description.Skeleton = function DescriptionSkeleton() {
   return (
     <div className="flex items-start gap-x-3 w-full">
       <Skeleton className="h-6 w-6 bg-neutral-200" />

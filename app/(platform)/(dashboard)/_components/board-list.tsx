@@ -6,6 +6,8 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MAX_BOARD } from "@/constants/board";
+import { getAvailableCount } from "@/lib/org-limit";
 export const BoardList = async () => {
   const { orgId } = auth();
   if (!orgId) {
@@ -19,6 +21,10 @@ export const BoardList = async () => {
       createAT: "desc",
     },
   });
+
+  const avaiCount = await getAvailableCount();
+  console.log(avaiCount);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center font-semibold text-lg text-neutral-700">
@@ -45,10 +51,12 @@ export const BoardList = async () => {
         flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
           >
             <p className="text-sm ml-2 mr-2">create new board</p>
-            <span className="text-xs">5 remaining</span>
+            <span className="text-xs">
+              {`${MAX_BOARD - avaiCount}`} remaining
+            </span>
             <Remaining
               sideOffset={40}
-              descrption={`Free workspace can have up to 5 open boards. For unlimted boards, upgrade the subscrption.`}
+              description={`Free workspace can have up to 5 open boards. For unlimted boards, upgrade the subscrption.`}
             >
               <HelpCircle className="absolute bottom-2 tight-2 h-[14px] w-[14px]" />
             </Remaining>

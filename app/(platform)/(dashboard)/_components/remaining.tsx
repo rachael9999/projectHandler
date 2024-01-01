@@ -7,14 +7,14 @@ import {
 
 interface remainingProps {
   children: React.ReactNode;
-  descrption: string;
+  description: string;
   side?: "left" | "right" | "top" | "bottom";
   sideOffset?: number;
 }
 
 export const Remaining = ({
   children,
-  descrption,
+  description,
   side = "bottom",
   sideOffset = 0,
 }: remainingProps) => {
@@ -27,7 +27,7 @@ export const Remaining = ({
           side={side}
           className="text-xs max-w-[220px] break-words"
         >
-          {descrption}
+          {description}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

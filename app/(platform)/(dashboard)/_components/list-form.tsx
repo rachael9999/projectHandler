@@ -56,6 +56,9 @@ export const ListForm = () => {
     if (e.key === "Escape") {
       disableEditing();
     }
+    if (e.key === "Enter") {
+      formRef.current?.requestSubmit();
+    }
   };
 
   useEventListener("keydown", onKeyDown);

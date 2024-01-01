@@ -8,6 +8,7 @@ import { createSafeAction } from "@/lib/create-safe-actions";
 
 import { UpdateCardOrder } from "./schema";
 import { InputType, ReturnType } from "./types";
+import { createAuditLog } from "@/lib/create-audit-log";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();

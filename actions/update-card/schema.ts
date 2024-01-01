@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const UpdateCard = z.object({
   boardId: z.string(),
-  descrption: z.optional(
+  description: z.optional(
     z
       .string({
         required_error: "Description is required",

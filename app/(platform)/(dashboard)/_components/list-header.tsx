@@ -36,6 +36,10 @@ export const ListHeader = ({ data, onAddCard }: listHeaderProps) => {
     if (e.key === "Escape") {
       formRef.current?.requestSubmit();
     }
+
+    if (e.key === "Enter") {
+      formRef.current?.requestSubmit();
+    }
   };
 
   const { execute, FieldErrors } = useAction(updateList, {
