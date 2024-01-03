@@ -37,12 +37,7 @@ const MarketingPage = () => {
         </div>
 
         <div className="my-8 w-full">
-          <video
-            src={"./Boards.mp4"}
-            controls
-            className="w-full h-auto"
-            alt="Promotional Video"
-          />
+          <video src={"./Boards.mp4"} controls className="w-full h-auto" />
         </div>
       </div>
 
