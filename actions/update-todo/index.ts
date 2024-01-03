@@ -11,6 +11,13 @@ import { InputType, ReturnType } from "./types";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
+interface ToDoItem {
+  todo: string; // Replace with the actual type of data.toDo
+  dateCreated: Date;
+  completed: boolean;
+  dateCompleted: Date | null;
+}
+
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
 
@@ -33,7 +40,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    let toDoItems = {};
+    let toDoItems: { [key: string]: ToDoItem } = {};
     if (!card) {
       return { error: "Card not found" };
     }

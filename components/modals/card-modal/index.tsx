@@ -40,11 +40,7 @@ export const CardModal = () => {
                 <Description data={cardData} />
               )}
               <div>
-                {cardData?.toDo !== null ? (
-                  <ToDo data={cardData} />
-                ) : (
-                  <ToDo.Skeleton />
-                )}
+                {cardData ? <ToDo data={cardData} /> : <ToDo.Skeleton />}
               </div>
               {!auditLogData ? (
                 <Activity.Skeleton />

@@ -14,7 +14,7 @@ interface ToDoItem {
   todo: string;
   dateCreated: string;
   completed: boolean;
-  dateCompleted?: string | null;
+  dateCompleted?: Date | null;
 }
 
 interface TodoProps {

@@ -12,6 +12,12 @@ import { InputType, ReturnType } from "./types";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
+interface ToDoItem {
+  todo: string; // Replace with the actual type of data.toDo
+  dateCreated: Date;
+  completed: boolean;
+}
+
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
 
@@ -34,7 +40,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    let toDoItems = {};
+    let toDoItems: { [key: string]: ToDoItem } = {};
     if (!card) {
       return { error: "Card not found" };
     }
@@ -46,6 +52,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         return { error: "Failed to parse to-do items." };
       }
     }
+
     // Create a new to-do item with a unique ID
     const newToDoId = uuidv4();
     toDoItems[newToDoId] = {
