@@ -57,7 +57,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
       const listId = formData.get("listId") as string;
       const boardId = params.boardId as string;
 
-      execute({ title, listId, boardId });
+      execute({ title, listId, boardId, importance: "UNDEFINED" });
     };
 
     if (isEditing) {
@@ -96,3 +96,4 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
 );
 
 CardForm.displayName = "CardForm";
+;

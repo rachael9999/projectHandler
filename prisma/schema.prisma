@@ -46,8 +46,7 @@ model Card {
   title        String
   order        Int
   description  String?  @db.Text
-  labelColor   String?  
-  labelText    String?
+  importance   Importance 
   toDo         Json?    
   deadline     DateTime?
   assignee     String? 
@@ -60,6 +59,13 @@ model Card {
   updatedAt    DateTime @updatedAt
 
   @@index([listId])
+}
+
+enum Importance {
+  UNDEFINED
+  LOW
+  MEDIUM
+  HIGH
 }
 
 

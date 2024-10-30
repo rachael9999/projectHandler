@@ -1,3 +1,4 @@
+// create-card.ts
 "use server";
 
 import { auth } from "@clerk/nextjs";
@@ -7,11 +8,11 @@ import { db } from "@/lib/db";
 import { createSafeAction } from "@/lib/create-safe-actions";
 
 import { CreateCard } from "./schema";
-import { InputType, ReturnType } from "./types";
+import { CreateCardInputType, CreateCardReturnType } from "./types";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
-const handler = async (data: InputType): Promise<ReturnType> => {
+const handler = async (data: CreateCardInputType): Promise<CreateCardReturnType> => {
   const { userId, orgId } = auth();
 
   if (!userId || !orgId) {
@@ -20,7 +21,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { title, boardId, listId } = data;
+  const { title, boardId, listId, importance } = data;
   let card;
 
   try {
@@ -34,25 +35,15 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
 
     if (!list) {
-      return {
-        error: "list not found",
-      };
+      return { error: "List not found" };
     }
-
-    const oriList = await db.list.findFirst({
-      where: { id: listId },
-      orderBy: { order: "desc" },
-      select: { order: true },
-    });
-
-    // ohhhhhhhh new order boiiii
-    const newOrder = oriList ? oriList.order + 1 : 1;
 
     card = await db.card.create({
       data: {
         title,
         listId,
-        order: newOrder,
+        order: 0, // Adjust order as needed
+        importance: importance !== "UNDEFINED" ? importance : "LOW", // Handle UNDEFINED importance
       },
     });
 
@@ -61,16 +52,16 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       entityId: card.id,
       entityType: ENTITY_TYPE.CARD,
       action: ACTION.CREATE,
-      message:``,
+      message: `Created card "${title}" with importance "${importance}"`,
     });
+
+    revalidatePath(`/board/${boardId}`);
+    return { data: card };
   } catch (error) {
     return {
-      error: "Failed to create.",
+      error: "Failed to create card.",
     };
   }
-
-  revalidatePath(`/board/${boardId}`);
-  return { data: card };
 };
 
 export const createCard = createSafeAction(CreateCard, handler);

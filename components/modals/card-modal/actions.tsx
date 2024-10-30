@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { Copy, Trash, ClipboardCheck, Calendar, Workflow } from "lucide-react";
+import { Copy, Trash, ClipboardCheck, Calendar, Workflow, Siren } from "lucide-react";
 import { useParams } from "next/navigation";
 
 import { CardWithList } from "@/types";
@@ -14,6 +14,7 @@ import { useCardModal } from "@/hooks/use-card-modals";
 import { ElementRef, useRef, useState, useEffect } from "react";
 import { createToDo } from "@/actions/create-todo";
 import { addDDL } from "@/actions/add-ddl";
+import { updateImportance } from "@/actions/update-importance"; 
 import React from "react";
 import { FormInput } from "@/components/form/form-input";
 import CustomDatePicker from "./date";
@@ -28,6 +29,8 @@ export const Actions = ({ data }: ActionsProps) => {
 
   const [toDoOptions, setToDoOptions] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [importance, setImportance] = useState<"UNDEFINED" | "LOW" | "MEDIUM" | "HIGH">(data.importance || "UNDEFINED"); 
+  const [isEditingImportance, setIsEditingImportance] = useState(false); 
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -89,6 +92,18 @@ export const Actions = ({ data }: ActionsProps) => {
     }
   );
 
+  const { execute: executeUpdateCard, isLoading: isLoadingUpdate } = useAction(
+    updateImportance,
+    {
+      onSuccess: (data) => {
+        toast.success(`Card importance updated`);
+      },
+      onError: (error) => {
+        toast.error(error);
+      },
+    }
+  );
+
   const onCopy = () => {
     const boardId = params.boardId as string;
 
@@ -142,6 +157,17 @@ export const Actions = ({ data }: ActionsProps) => {
 
   const onBlur = () => {
     formRef.current?.requestSubmit();
+  };
+
+  const handleImportanceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newImportance = event.target.value as "UNDEFINED" | "LOW" | "MEDIUM" | "HIGH";
+    setImportance(newImportance);
+
+    executeUpdateCard({
+      id: data.id,
+      boardId: params.boardId as string,
+      importance: newImportance,
+    });
   };
 
   useEffect(() => {
@@ -222,9 +248,34 @@ export const Actions = ({ data }: ActionsProps) => {
           size="inline"
         >
           <ClipboardCheck className="h-4 w-4 mr-2" />
-          Add To Do
+          To Do
         </Button>
       )}
+        {isEditingImportance ? (
+        <select
+          id="importance"
+          value={importance}
+          onChange={handleImportanceChange}
+          onBlur={() => setIsEditingImportance(false)}
+          className="mt-2 p-2 border rounded w-full"
+        >
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+        </select>
+      ) : (
+        <Button
+          onClick={() => setIsEditingImportance(true)}
+          disabled={isLoadingUpdate}
+          variant="gray"
+          className="w-full justify-start"
+          size="inline"
+        >
+          <Siren className="h-4 w-4 mr-2" />
+          {importance.charAt(0) + importance.slice(1).toLowerCase()}
+        </Button>
+      )}
+
     </div>
   );
 };

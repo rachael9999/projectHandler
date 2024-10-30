@@ -1,3 +1,4 @@
+// schema.ts
 import { z } from "zod";
 
 export const CreateCard = z.object({
@@ -7,4 +8,5 @@ export const CreateCard = z.object({
   }),
   boardId: z.string(),
   listId: z.string(),
+  importance: z.enum(["UNDEFINED", "LOW", "MEDIUM", "HIGH"]).default("UNDEFINED"), 
 });
