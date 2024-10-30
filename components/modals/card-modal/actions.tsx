@@ -20,7 +20,13 @@ import { FormInput } from "@/components/form/form-input";
 import CustomDatePicker from "./date";
 
 interface ActionsProps {
-  data: CardWithList;
+  data: {
+    id: string;
+    title: string;
+    start: string;
+    end: string;
+    importance: "UNDEFINED" | "LOW" | "MEDIUM" | "HIGH";
+  };
 }
 
 export const Actions = ({ data }: ActionsProps) => {
@@ -29,12 +35,12 @@ export const Actions = ({ data }: ActionsProps) => {
 
   const [toDoOptions, setToDoOptions] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [importance, setImportance] = useState<"UNDEFINED" | "LOW" | "MEDIUM" | "HIGH">(data.importance || "UNDEFINED"); 
+  const [importance, setImportance] = useState<"UNDEFINED" | "LOW" | "MEDIUM" | "HIGH">(data.importance); 
   const [isEditingImportance, setIsEditingImportance] = useState(false); 
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [dueDate, setDueDate] = useState<Date | null>(data.deadline ? new Date(data.deadline) : null);
+  const [dueDate, setDueDate] = useState<Date | null>(data.end ? new Date(data.end) : null);
 
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
@@ -97,6 +103,7 @@ export const Actions = ({ data }: ActionsProps) => {
     {
       onSuccess: (data) => {
         toast.success(`Card importance updated`);
+        setImportance(data.importance); 
       },
       onError: (error) => {
         toast.error(error);
@@ -251,7 +258,7 @@ export const Actions = ({ data }: ActionsProps) => {
           To Do
         </Button>
       )}
-        {isEditingImportance ? (
+      {isEditingImportance ? (
         <select
           id="importance"
           value={importance}
@@ -259,6 +266,7 @@ export const Actions = ({ data }: ActionsProps) => {
           onBlur={() => setIsEditingImportance(false)}
           className="mt-2 p-2 border rounded w-full"
         >
+          <option value="UNDEFINED">Undefined</option>
           <option value="LOW">Low</option>
           <option value="MEDIUM">Medium</option>
           <option value="HIGH">High</option>
@@ -275,7 +283,6 @@ export const Actions = ({ data }: ActionsProps) => {
           {importance.charAt(0) + importance.slice(1).toLowerCase()}
         </Button>
       )}
-
     </div>
   );
 };

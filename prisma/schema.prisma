@@ -19,7 +19,7 @@ model Board {
   ImageUserName   String @db.Text
   ImageLinkHTML   String @db.Text
 
-  createAT        DateTime @default(now())
+  createdAT        DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   list List[]
@@ -35,7 +35,7 @@ model List {
 
   cards Card[]
 
-  createAT        DateTime @default(now())
+  createdAT        DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   @@index([boardId])

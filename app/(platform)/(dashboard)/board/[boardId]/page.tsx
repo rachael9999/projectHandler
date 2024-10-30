@@ -1,6 +1,5 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
 import { db } from "@/lib/db";
 import { ListContainer } from "../../_components/list-container";
 
@@ -31,14 +30,16 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
         },
       },
     },
-
     orderBy: {
       order: "asc",
     },
   });
+
   return (
-    <div className="p-4 h-full overflow-x-auto">
-      <ListContainer boardId={params.boardId} data={lists} />
+    <div>
+      <div>
+        <ListContainer boardId={params.boardId} data={lists} />
+      </div>
     </div>
   );
 };

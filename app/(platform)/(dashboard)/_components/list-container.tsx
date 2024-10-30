@@ -113,7 +113,7 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
         setOrderedData(newOrderedData);
         executeUpdateCardOrder({
           boardId: boardId,
-          items: reorderedCards,
+          items: reorderedCards.map(card => ({ ...card, createdAT: card.createdAt })),
         });
         // User moves the card to another list
       } else {
@@ -136,7 +136,7 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
         setOrderedData(newOrderedData);
         executeUpdateCardOrder({
           boardId: boardId,
-          items: destList.cards,
+          items: destList.cards.map(card => ({ ...card, createdAT: card.createdAt })),
         });
       }
     }
