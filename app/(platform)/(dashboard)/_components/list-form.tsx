@@ -88,7 +88,7 @@ export const ListForm = () => {
   }
   return (
     <ListWrapper>
-      <form className="w-full p-3 rounded-md bg-white space-y-4 shadow-md">
+      <form className="w-full px-2 py-1 rounded-md bg-white space-y-3 shadow-md text-black">
         <button
           onClick={enableEditing}
           className="w-full rounded-md bg-white/80 hover:bg-white/50 transition 

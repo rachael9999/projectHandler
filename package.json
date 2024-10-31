@@ -30,6 +30,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^3.0.6",
+    "dhtmlx-gantt": "^9.0.1",
+    "frappe-gantt": "^0.8.1",
     "lucide-react": "^0.294.0",
     "next": "^14.0.3",
     "react": "^18.3.1",

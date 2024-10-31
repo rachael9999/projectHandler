@@ -29,6 +29,7 @@ const CalendarPage = async ({ params }: CalendarPageProps) => {
     title: card.title,
     start: card.createdAt.toISOString(),
     end: card.deadline ? card.deadline.toISOString() : card.createdAt.toISOString(),
+    importance: card.importance as 'UNDEFINED' | 'LOW' | 'MEDIUM' | 'HIGH', 
   }));
 
   return (

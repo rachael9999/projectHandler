@@ -76,8 +76,10 @@ export const Actions = ({ data }: ActionsProps) => {
     {
       onSuccess: (data) => {
         toast.success(`Card "${data.title}" ddl added`);
-        setDueDate(data.deadline ? new Date(data.deadline) : null);
-        cardModal.onClose();
+        if (data.deadline) {
+          setDueDate(new Date(data.deadline));
+        }
+        setShowDatePicker(false); 
       },
       onError: (error) => {
         toast.error(error);
@@ -124,7 +126,6 @@ export const Actions = ({ data }: ActionsProps) => {
 
   const handleDateChange = (date: Date | null) => {
     if (date && date.getTime() === dueDate?.getTime()) {
-      // If the selected date is the same as the current due date, do nothing
       return;
     }
     setSelectedDate(date);
@@ -182,6 +183,10 @@ export const Actions = ({ data }: ActionsProps) => {
       inputRef.current?.focus();
     }
   }, [toDoOptions]);
+
+  useEffect(() => {
+    console.log('Updated dueDate:', dueDate);
+  }, [dueDate]);
 
   return (
     <div className="space-y-1 mt-1">
