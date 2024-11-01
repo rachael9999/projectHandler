@@ -8,7 +8,7 @@ CREATE TABLE `Board` (
     `ImageFullUrl` TEXT NOT NULL,
     `ImageUserName` TEXT NOT NULL,
     `ImageLinkHTML` TEXT NOT NULL,
-    `createAT` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAT` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -20,7 +20,7 @@ CREATE TABLE `List` (
     `title` VARCHAR(191) NOT NULL,
     `order` INTEGER NOT NULL,
     `boardId` VARCHAR(191) NOT NULL,
-    `createAT` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `createdAT` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     INDEX `List_boardId_idx`(`boardId`),
@@ -33,11 +33,13 @@ CREATE TABLE `Card` (
     `title` VARCHAR(191) NOT NULL,
     `order` INTEGER NOT NULL,
     `description` TEXT NULL,
-    `labelColor` VARCHAR(191) NULL,
-    `labelText` VARCHAR(191) NULL,
+    `importance` ENUM('UNDEFINED', 'LOW', 'MEDIUM', 'HIGH') NOT NULL,
     `toDo` JSON NULL,
     `deadline` DATETIME(3) NULL,
     `assignee` VARCHAR(191) NULL,
+    `progress` DOUBLE NOT NULL DEFAULT 0,
+    `start` VARCHAR(191) NULL,
+    `end` VARCHAR(191) NULL,
     `listId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -57,6 +59,7 @@ CREATE TABLE `AuditLog` (
     `userId` VARCHAR(191) NOT NULL,
     `userImage` TEXT NOT NULL,
     `userName` TEXT NOT NULL,
+    `message` TEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
