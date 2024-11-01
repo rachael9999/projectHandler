@@ -59,7 +59,7 @@ CREATE TABLE `AuditLog` (
     `userId` VARCHAR(191) NOT NULL,
     `userImage` TEXT NOT NULL,
     `userName` TEXT NOT NULL,
-    `message` TEXT NOT NULL,
+    `message` TEXT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
