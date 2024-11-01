@@ -6,6 +6,10 @@ This project is designed to efficiently manage tasks and projects. Below are som
 ![Workspace](public/photo/workspace.png)
 The workspace provides an overview of all projects across different organizations. Users can sign in using Google and be assigned roles as admins or workers. All actions are logged under activity. Users can build their own dashboards or use predesigned models to track their projects. Each dashboard offers access to a general dashboard view, calendar view, Gantt chart, and importance view.
 
+### User Story
+![User Story](public/photo/User%20Story%20.png)
+The user story view manages key feature manipulation, tracking, and user feedback.
+
 ### Calendar View
 ![Calendar View](public/photo/calendar.png)
 The calendar view helps track deadlines on daily, weekly, and monthly views.
@@ -17,10 +21,6 @@ The Gantt chart tracks project progress and the relationships between tasks.
 ### Importance View
 ![Importance View](public/photo/importance.png)
 The importance view allows users to prioritize and update the importance of tasks. Projects can be added personally or assigned by an admin.
-
-### User Story
-![User Story](public/photo/User%20Story%20.png)
-The user story view manages key feature manipulation, tracking, and user feedback.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
