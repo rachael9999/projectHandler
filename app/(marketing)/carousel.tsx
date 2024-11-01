@@ -32,7 +32,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             key={index}
             className={`carousel-image ${index === currentIndex ? 'active' : ''}`}
           >
-            <Image src={image.src} alt={image.alt} width={500} height={300} />
+            <Image src={image.src} alt={image.alt} width={1500} height={300} />
           </div>
         ))}
       </div>
