@@ -146,19 +146,24 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="lists" type="list" direction="horizontal">
         {(provided) => (
-          <ol
+          <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="flex gap-x-3 h-full"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 h-full list-none" // Added list-none to remove default list styling
           >
-            <ListForm />
+            <div className="col-span-1">
+              <ListForm />
+            </div>
             {orderedData.map((list, index) => (
-              <ListItem key={list.id} index={index} data={list} />
+              <div
+                key={list.id}
+                className={`col-span-1 ${index === 0 ? 'lg:col-start-2' : ''}`}
+              >
+                <ListItem index={index} data={list} />
+              </div>
             ))}
             {provided.placeholder}
-
-            <div className="flex-shrink-0 w-1" />
-          </ol>
+          </div>
         )}
       </Droppable>
     </DragDropContext>

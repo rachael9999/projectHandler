@@ -11,6 +11,7 @@ interface GanttChartProps {
     title: string;
     start: string;
     end: string;
+    order: number;
   }[];
 }
 
@@ -25,9 +26,10 @@ const GanttChart = ({ events }: GanttChartProps) => {
       gantt.config.date_format = "%Y-%m-%d %H:%i";
 
       gantt.init(ganttContainer.current);
+      const sortedEvents = events.sort((a, b) => a.order - b.order);
 
       const tasks = {
-        data: events.map(event => ({
+        data: sortedEvents.map(event => ({
           id: event.id,
           text: event.title,
           start_date: formatDate(event.start),

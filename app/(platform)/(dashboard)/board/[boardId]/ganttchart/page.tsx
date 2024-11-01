@@ -23,6 +23,7 @@ const GanttChartPage = async ({ params }: GanttChartPageProps) => {
 
     const cards = await db.card.findMany({
         where: { List: { boardId } },
+        orderBy: { order: 'asc' },
     });
 
     const events = cards.map(card => ({

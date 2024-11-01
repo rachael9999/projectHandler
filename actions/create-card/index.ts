@@ -38,11 +38,17 @@ const handler = async (data: CreateCardInputType): Promise<CreateCardReturnType>
       return { error: "List not found" };
     }
 
+    const cardCount = await db.card.count({
+      where: {
+        listId: listId,
+      },
+    });
+
     card = await db.card.create({
       data: {
         title,
         listId,
-        order: 0, // Adjust order as needed
+        order: cardCount,
         importance: importance !== "UNDEFINED" ? importance : "LOW", // Handle UNDEFINED importance
       },
     });
