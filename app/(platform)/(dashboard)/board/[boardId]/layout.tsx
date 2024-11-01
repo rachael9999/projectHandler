@@ -30,7 +30,7 @@ const BoardIdLayout = async ({ params, children }: BoardIdLayoutProps) => {
 
   return (
     <div
-      className="relative h-full bg-no-repeat bg-cover bg-center"
+      className="relative min-h-screen h-full bg-no-repeat bg-cover bg-center overflow-y-auto"
       style={{ backgroundImage: `url(${board.ImageFullUrl})` }}
     >
       <BoardNavbar data={board} />

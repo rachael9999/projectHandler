@@ -10,6 +10,7 @@ import { Actions } from "./actions";
 import { AuditLog } from "@prisma/client";
 import { Activity } from "./activity";
 import { ToDo } from "./to-do";
+import './card-modal.css';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
@@ -36,7 +37,7 @@ export const CardModal = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="dialog-content">
         {!cardData ? <Header.skeleton /> : <Header data={cardData} />}
 
         <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
