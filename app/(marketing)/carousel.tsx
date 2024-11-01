@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface Image {
   src: string;
@@ -31,7 +32,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             key={index}
             className={`carousel-image ${index === currentIndex ? 'active' : ''}`}
           >
-            <img src={image.src} alt={image.alt} />
+            <Image src={image.src} alt={image.alt} width={500} height={300} />
           </div>
         ))}
       </div>
