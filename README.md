@@ -3,7 +3,7 @@
 This project is designed to efficiently manage tasks and projects. Below are some screenshots showcasing the key features of the application:
 
 ### Workspace
-![Workspace](photo/workspace.png)
+![Workspace](public/photo/workspace.png)
 The workspace provides an overview of all projects across different organizations. Users can sign in using Google and be assigned roles as admins or workers. All actions are logged under activity. Users can build their own dashboards or use predesigned models to track their projects. Each dashboard offers access to a general dashboard view, calendar view, Gantt chart, and importance view.
 
 ### Calendar View
