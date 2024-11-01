@@ -4,13 +4,20 @@ import { useQuery } from "@tanstack/react-query";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useCardModal } from "@/hooks/use-card-modals";
 import { CardWithList } from "@/types";
-import { fetcher } from "@/app/api/cards/[cardId]/route";
 import { Header } from "./header";
 import { Description } from "./description";
 import { Actions } from "./actions";
 import { AuditLog } from "@prisma/client";
 import { Activity } from "./activity";
 import { ToDo } from "./to-do";
+
+const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};
 
 export const CardModal = () => {
   const id = useCardModal((state) => state.id);
@@ -26,6 +33,7 @@ export const CardModal = () => {
     queryKey: ["card-logs", id],
     queryFn: () => fetcher(`/api/cards/${id}/logs`),
   });
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>

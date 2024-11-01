@@ -29,10 +29,13 @@ export async function GET(
         },
       },
     });
+
+    if (!card) {
+      return new NextResponse("Card not found", { status: 404 });
+    }
+
     return NextResponse.json(card);
   } catch (error) {
-    return new NextResponse("Internal error");
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
-
-export const fetcher = (url: string) => fetch(url).then((res) => res.json());
