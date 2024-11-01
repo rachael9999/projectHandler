@@ -31,6 +31,7 @@ const GanttChartPage = async ({ params }: GanttChartPageProps) => {
       title: card.title,
       start: card.createdAt.toISOString(),
       end: card.deadline ? card.deadline.toISOString() : new Date(card.createdAt.getTime() + 24 * 60 * 60 * 1000).toISOString(),
+      order: card.order,
     }));
 
 
