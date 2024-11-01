@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `card` ADD COLUMN `end` VARCHAR(191) NULL,
+    ADD COLUMN `start` VARCHAR(191) NULL;

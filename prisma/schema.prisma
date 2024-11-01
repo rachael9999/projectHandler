@@ -52,6 +52,10 @@ model Card {
   assignee     String? 
   progress     Float @default(0)
 
+  start String?
+
+  end String?
+
   listId       String
   List         List     @relation(fields: [listId], references: [id], onDelete: Cascade)
 

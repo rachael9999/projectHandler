@@ -20,13 +20,7 @@ import { FormInput } from "@/components/form/form-input";
 import CustomDatePicker from "./date";
 
 interface ActionsProps {
-  data: {
-    id: string;
-    title: string;
-    start: string;
-    end: string;
-    importance: "UNDEFINED" | "LOW" | "MEDIUM" | "HIGH";
-  };
+  data: CardWithList;
 }
 
 export const Actions = ({ data }: ActionsProps) => {
