@@ -1,8 +1,8 @@
 .dialog-content {
-    width: 600px; 
+    width: 1500px; 
     height: 80vh; 
     overflow-y: auto; 
     overflow-x: hidden; 
-    padding: 20px; 
+    padding: 40px; 
     box-sizing: border-box; 
   }
